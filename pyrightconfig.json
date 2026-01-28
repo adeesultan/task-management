@@ -1,0 +1,12 @@
+{
+  "include": [
+    "task_management",
+    "core"
+  ],
+  "exclude": [
+    "**/__pycache__",
+    "**/migrations"
+  ],
+  "pythonVersion": "3.12",
+  "typeCheckingMode": "basic"
+}

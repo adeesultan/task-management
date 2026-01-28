@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.log
+
+# Django
+*.sqlite3
+.env
+.env.*
+local_settings.py
+
+# Virtualenv
+venv/
+env/
+
+# IDE
+.vSCode/
+.idea/
+
+# OS
+.DS_Store
+
+# Logs & emails
+logs/
