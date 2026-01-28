@@ -23,16 +23,18 @@ class TaskSerializer(serializers.ModelSerializer):
         status = attrs.get("status")
         description = attrs.get("description")
 
-        if status == Task.COMPLETED and not description:
-            raise serializers.ValidationError(
-                "Description is required to mark task as completed."
-            )
+        
+        if status == Task.COMPLETED:
+            if self.instance and description is None:
+                description = self.instance.description
+            
+            if not description:
+                raise serializers.ValidationError(
+                    "Description is required to mark task as completed."
+                )
 
         assigned_to = attrs.get("assigned_to")
         project = attrs.get("project")
-
-        # Note: Organization validation removed as User model doesn't have organization field
-        # If organization support is needed, add it to the User model first
 
         return attrs
 

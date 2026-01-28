@@ -51,10 +51,13 @@ class TaskViewSet(ModelViewSet):
             data={"status": Task.COMPLETED},
             partial=True
         )
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-
-        return Response({"detail": "Task marked as completed."})
+        
+        # Validate explicitly without raise_exception for proper control flow
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"detail": "Task marked as completed."})
+        
+        return Response(serializer.errors, status=400)
 
     @action(detail=False, methods=["get"])
     def overdue(self, request):
